@@ -1,14 +1,32 @@
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * FILE HANDLING UTILITY PROGRAM
+ * This program provides basic file operations including:
+ * - Creating new files
+ * - Writing content to files
+ * - Reading file contents
+ * - Modifying file contents (search and replace)
+ * - Deleting files
+ * Developed for CODTECH internship requirements
+ */
 public class FileOperations {
+    // Scanner object for user input
     private static final Scanner scanner = new Scanner(System.in);
+    // Stores the current working file path
     private static String currentFilePath = "default.txt";
 
+    /**
+     * Main method - program entry point
+     * Displays menu and processes user choices
+     */
     public static void main(String[] args) {
         System.out.println("\nFILE HANDLING UTILITY");
         
+        // Main program loop
         while (true) {
+            // Display menu options
             System.out.println("\nMAIN MENU:");
             System.out.println("1. Set/Create File");
             System.out.println("2. Write to File");
@@ -18,8 +36,10 @@ public class FileOperations {
             System.out.println("6. Exit");
             System.out.print("Enter your choice (1-6): ");
 
+            // Get and validate user input
             int choice = getIntInput(1, 6);
 
+            // Process user choice
             switch (choice) {
                 case 1: createOrSetFile(); break;
                 case 2: writeToFile(); break;
@@ -31,6 +51,10 @@ public class FileOperations {
         }
     }
 
+    /**
+     * Creates a new file or sets an existing file as current
+     * Prompts user for filename and verifies existence
+     */
     private static void createOrSetFile() {
         System.out.print("\nEnter file name (e.g., 'data.txt'): ");
         currentFilePath = scanner.nextLine();
@@ -49,12 +73,17 @@ public class FileOperations {
         }
     }
 
+    /**
+     * Writes content to the current file
+     * Overwrites any existing content
+     */
     private static void writeToFile() {
         if (!checkFileExists()) return;
         
         System.out.print("\nEnter text to write: ");
         String content = scanner.nextLine();
         
+        // Try-with-resources to automatically close FileWriter
         try (FileWriter writer = new FileWriter(currentFilePath)) {
             writer.write(content);
             System.out.println("Successfully wrote to file");
@@ -63,10 +92,15 @@ public class FileOperations {
         }
     }
 
+    /**
+     * Reads and displays content from the current file
+     * Shows content line by line
+     */
     private static void readFromFile() {
         if (!checkFileExists()) return;
         
         System.out.println("\nFile Content:");
+        // Try-with-resources to automatically close BufferedReader
         try (BufferedReader reader = new BufferedReader(new FileReader(currentFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -77,6 +111,10 @@ public class FileOperations {
         }
     }
 
+    /**
+     * Modifies file content by replacing all occurrences of specified text
+     * Performs global search and replace operation
+     */
     private static void modifyFile() {
         if (!checkFileExists()) return;
         
@@ -86,6 +124,7 @@ public class FileOperations {
         String newText = scanner.nextLine();
         
         StringBuilder content = new StringBuilder();
+        // Read file and perform replacements
         try (BufferedReader reader = new BufferedReader(new FileReader(currentFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -96,6 +135,7 @@ public class FileOperations {
             return;
         }
 
+        // Write modified content back to file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(currentFilePath))) {
             writer.write(content.toString());
             System.out.println("File modified successfully");
@@ -104,6 +144,10 @@ public class FileOperations {
         }
     }
 
+    /**
+     * Deletes the current file
+     * Resets currentFilePath to default after deletion
+     */
     private static void deleteFile() {
         if (!checkFileExists()) return;
         
@@ -116,6 +160,10 @@ public class FileOperations {
         }
     }
 
+    /**
+     * Checks if current file exists
+     * @return true if file exists, false otherwise
+     */
     private static boolean checkFileExists() {
         File file = new File(currentFilePath);
         if (!file.exists()) {
@@ -125,6 +173,12 @@ public class FileOperations {
         return true;
     }
 
+    /**
+     * Validates integer input within specified range
+     * @param min Minimum allowed value
+     * @param max Maximum allowed value
+     * @return Validated integer input
+     */
     private static int getIntInput(int min, int max) {
         while (true) {
             try {
@@ -137,6 +191,10 @@ public class FileOperations {
         }
     }
 
+    /**
+     * Cleanly exits the program
+     * Closes resources and displays exit message
+     */
     private static void exitProgram() {
         System.out.println("\nThank you for using File Utility!");
         scanner.close();
