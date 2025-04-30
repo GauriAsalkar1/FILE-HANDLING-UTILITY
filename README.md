@@ -18,6 +18,6 @@ OUTPUT:
 
 ![Image](https://github.com/user-attachments/assets/51bd9148-e81d-4505-b97d-6127e6cd8849)
 
-![Image](https://github.com/user-attachments/assets/6083fc42-096b-4b5a-9798-7c9ecca5e0cc)
+![Image](https://github.com/user-attachments/assets/d1bfbe13-708d-40c3-9a05-cf63bd3278f5)
 
-![Image](https://github.com/user-attachments/assets/51bd9148-e81d-4505-b97d-6127e6cd8849)
+![Image](https://github.com/user-attachments/assets/4cd4f5f5-001f-4acb-af57-0686673ab2e3)
